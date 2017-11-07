@@ -1,4 +1,26 @@
-<p><%= private_message.body %></p>
+<!-- <p><%= private_message.body %></p>
 <p>at <strong><%= private_message.created_at %></strong><br>
   by <strong><%= private_message.user.name %></strong></p>
-<hr>
+<hr> -->
+
+<% if private_message.user == current_user %>
+  <div class="chat_message_wrapper chat_message_right">
+    <ul class="chat_message">
+      <li>
+        <p><%= private_message.body %>
+          <span class="chat_message_time"><%= private_message.created_at %></span>
+        </p>
+      </li>
+    </ul>
+  </div>
+<% else %>
+  <div class="chat_message_wrapper">
+    <ul class="chat_message">
+      <li>
+        <p><%= private_message.body %>
+          <span class="chat_message_time"><%= private_message.created_at %></span>
+        </p>
+      </li>
+    </ul>
+  </div>
+<% end %>

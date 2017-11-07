@@ -1,15 +1,27 @@
-<h1>Chatting with <%= @conversation.with(current_user).name %></h1>
-
-<div id="conversation-main">
-  <div id="conversation-body" data-conversation-id="<%= @conversation.id %>">
-    <%= render @conversation.private_messages %>
+<div id="sidebar_secondary" class="chat-window">
+  <div class="popup-head">
+    <div class="popup-head-left pull-left">
+      <%= gravatar_for @conversation.with(current_user) %>
+      <h1><%= @conversation.with(current_user).name %></h1>
+    </div>
+    <a href="" class="close-chat pull-right"><i class="fa fa-close" data-id="chat_window_1"></i></a>
+    <a href="" class="minimize-chat pull-right"><i id="minim_chat_window" class="fa fa-window-minimize"></i></a>
   </div>
 
-  <%= form_for @private_message do |f| %>
-    <%= hidden_field_tag 'conversation_id', @conversation.id %>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-
-    <%= f.submit %>
-  <% end %>
+  <div id="chat" class="chat_box_wrapper chat_box_small chat_box_active">
+    <div class="chat_box touchscroll chat_box_colors_a" id="conversation-body" data-conversation-id="<%= @conversation.id %>">
+      <%= render @conversation.private_messages %>
+    </div>
+    <div class="chat_submit_box">
+      <div class="gurdeep-chat-box">
+        <!-- <input type="text" placeholder="Type a message" id="submit_message" name="submit_message" class="md-input"> -->
+        <%= form_for @private_message do |f| %>
+          <%= hidden_field_tag 'conversation_id', @conversation.id %>
+          <%= f.text_field :body, class: "md-input", placeholder: "Type a message"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<%#= render 'shared/chat_window' %>
